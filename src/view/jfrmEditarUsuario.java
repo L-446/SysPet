@@ -9,6 +9,7 @@ package view;
 //import dao.AlunoDao;
 import controller.JTableController;
 import dao.LoginDao;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -43,6 +44,9 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao listar Usuarios.");
         }
+        
+        Color minhaCor = new Color(255,228,225);
+        getContentPane().setBackground(minhaCor);
     }
 
     /**
@@ -64,6 +68,7 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 228, 225));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Usuário"));
 
         jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(

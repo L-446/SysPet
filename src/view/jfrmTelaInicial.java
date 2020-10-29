@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import dao.LoginDao;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,6 +48,9 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         this.setTitle("Login");
         this.setSize(806, 537);
         this.setLocationRelativeTo(null);
+        
+        Color minhaCor = new Color(255,228,225);
+        getContentPane().setBackground(minhaCor);
 
         // listarUsuarios();
         // listarUsuariosLogados();
@@ -69,7 +73,9 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCasdastro = new javax.swing.JMenu();
         jMenuItemUsuarioCadastro = new javax.swing.JMenuItem();
+        jMenuItemClienteCadastro = new javax.swing.JMenuItem();
         jMenuItemPetCadastro = new javax.swing.JMenuItem();
+        jMenuItemAdocoesCadastro = new javax.swing.JMenuItem();
         jMenuEditar = new javax.swing.JMenu();
         jMenuItemUsuarioEditar = new javax.swing.JMenuItem();
         relatorio = new javax.swing.JMenu();
@@ -80,21 +86,24 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Administrador Financeiro");
+        setTitle("Tela Inicial");
+        setBackground(new java.awt.Color(255, 228, 225));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Sistema Exemplo"));
+        jPanel1.setBackground(new java.awt.Color(255, 228, 225));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SYSPET", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 713, Short.MAX_VALUE)
+            .addGap(0, 729, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
+            .addGap(0, 358, Short.MAX_VALUE)
         );
 
+        jBConcluir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBConcluir.setText("Fechar");
         jBConcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,8 +111,10 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jMenuCasdastro.setText("Casdastro");
+        jMenuCasdastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadastrar.png"))); // NOI18N
+        jMenuCasdastro.setText("Casdastros");
 
+        jMenuItemUsuarioCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add-user.png"))); // NOI18N
         jMenuItemUsuarioCadastro.setText("Usuário");
         jMenuItemUsuarioCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +123,16 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         });
         jMenuCasdastro.add(jMenuItemUsuarioCadastro);
 
+        jMenuItemClienteCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add-cliente.png"))); // NOI18N
+        jMenuItemClienteCadastro.setText("Cliente");
+        jMenuItemClienteCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClienteCadastroActionPerformed(evt);
+            }
+        });
+        jMenuCasdastro.add(jMenuItemClienteCadastro);
+
+        jMenuItemPetCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add-pet.png"))); // NOI18N
         jMenuItemPetCadastro.setText("Pet");
         jMenuItemPetCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,10 +141,21 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         });
         jMenuCasdastro.add(jMenuItemPetCadastro);
 
+        jMenuItemAdocoesCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add-adocao.png"))); // NOI18N
+        jMenuItemAdocoesCadastro.setText("Adoções");
+        jMenuItemAdocoesCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAdocoesCadastroActionPerformed(evt);
+            }
+        });
+        jMenuCasdastro.add(jMenuItemAdocoesCadastro);
+
         jMenuBar1.add(jMenuCasdastro);
 
+        jMenuEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
         jMenuEditar.setText("Editar");
 
+        jMenuItemUsuarioEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/edit-user.png"))); // NOI18N
         jMenuItemUsuarioEditar.setText("Usuário");
         jMenuItemUsuarioEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,9 +166,11 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuEditar);
 
+        relatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/relatorio.png"))); // NOI18N
         relatorio.setText("Relatorio");
 
-        jMenuItemRelatorio.setText("Gerar Relatorio");
+        jMenuItemRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/gerar-relatorio.png"))); // NOI18N
+        jMenuItemRelatorio.setText("Relatorio");
         jMenuItemRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemRelatorioActionPerformed(evt);
@@ -165,8 +199,8 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBConcluir)
                 .addContainerGap())
         );
@@ -287,10 +321,17 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
         jfrmCadastroPet cadastroPet = new jfrmCadastroPet();
         cadastroPet.show();
-      
-        
-
     }//GEN-LAST:event_jMenuItemPetCadastroActionPerformed
+
+    private void jMenuItemAdocoesCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdocoesCadastroActionPerformed
+        jfrmCadastrarDoacao cadastroDoacao = new jfrmCadastrarDoacao();
+        cadastroDoacao.show();
+    }//GEN-LAST:event_jMenuItemAdocoesCadastroActionPerformed
+
+    private void jMenuItemClienteCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteCadastroActionPerformed
+        jfrmCadastrarCliente cadastroCliente = new jfrmCadastrarCliente();
+        cadastroCliente.show();
+    }//GEN-LAST:event_jMenuItemClienteCadastroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -300,6 +341,8 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCasdastro;
     private javax.swing.JMenu jMenuEditar;
+    private javax.swing.JMenuItem jMenuItemAdocoesCadastro;
+    private javax.swing.JMenuItem jMenuItemClienteCadastro;
     private javax.swing.JMenuItem jMenuItemPetCadastro;
     private javax.swing.JMenuItem jMenuItemRelatorio;
     private javax.swing.JMenuItem jMenuItemUsuarioCadastro;

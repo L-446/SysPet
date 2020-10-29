@@ -12,12 +12,12 @@ package model;
 public class Pet {
     private int id;
     private String raca;
-    private String idade;
+    private int idade;
     private double peso;
     private  String vacinas;
     
     
-    public Pet(String raca, String idade, double peso, String vacinas){
+    public Pet(String raca, int idade, double peso, String vacinas){
         this.raca = raca;
         this.idade = idade;
         this.peso = peso;
@@ -26,8 +26,9 @@ public class Pet {
     }
 
     public Pet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
     public int getId(){
         return id;
@@ -46,11 +47,11 @@ public class Pet {
        
    }
       
-   public String getIdade(){
+   public int getIdade(){
        return idade;
    }
    
-   public void setIdade(String idade){
+   public void setIdade(int idade){
        this.idade = idade;
    }
     
