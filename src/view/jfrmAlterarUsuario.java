@@ -185,7 +185,7 @@ public class jfrmAlterarUsuario extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Dados cadastrados com sucesso!");
                     hide();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Falha ao inserir o aluno! " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Falha ao inserir o Usuario! " + ex.getMessage());
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Senha não confere.");

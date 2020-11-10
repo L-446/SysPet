@@ -65,6 +65,7 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
         jBExcluirUsuario = new javax.swing.JButton();
         jBAlterarUsuario = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,17 +141,23 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/papagaio.png"))); // NOI18N
+        jLabel1.setText("SYSPET");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jBAlterarUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBExcluirUsuario)
-                .addGap(220, 220, 220)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(87, 87, 87)
                 .addComponent(jBCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(81, 81, 81)
+                .addComponent(jBExcluirUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBAlterarUsuario)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,8 +171,9 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jBCancelar)
                     .addComponent(jBExcluirUsuario)
-                    .addComponent(jBAlterarUsuario))
-                .addGap(0, 18, Short.MAX_VALUE))
+                    .addComponent(jBAlterarUsuario)
+                    .addComponent(jLabel1))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("Editar Usuario");
@@ -283,6 +291,7 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton jBAlterarUsuario;
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBExcluirUsuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUsuario;

@@ -12,6 +12,7 @@ package model;
 public class Pet {
     private int id;
     private String raca;
+    private String sexo;
     private int idade;
     private double peso;
     private  String vacinas;
@@ -69,4 +70,23 @@ public class Pet {
   public void setVacinas(String vacinas){
       this.vacinas = vacinas;
   }
+
+    /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getsexo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+  
 }

@@ -1,17 +1,21 @@
 package model;
 
+import javax.swing.JOptionPane;
+
 public class Cliente {
     private int id;
     private String nome;
     private String cpf;
     private String endereco;
     private int numero;
+    private int idade;
 
     public Cliente(String nome, String cpf, String endereco){
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.numero = numero;
+        this.idade = idade;
         
     }   
 
@@ -88,4 +92,19 @@ public class Cliente {
     public void setNumero(int numero) {
         this.numero = numero;
     }
+
+    /**
+     * @return the idade
+     */
+    public int getIdade() {
+        return idade;
+    }
+
+    /**
+     * @param idade the idade to set
+     */
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+    
 }

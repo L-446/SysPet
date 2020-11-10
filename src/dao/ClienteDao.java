@@ -11,12 +11,13 @@ import model.Cliente;
 public class ClienteDao {
     public void inserir(Cliente l) throws Exception{
         try{
-            String insereCliente = "INSERT INTO `tbl_cliente`(`nome_do_cliente`, `doc`, `endereco`, `numero`) VALUES (?,?,?,?)";
+            String insereCliente = "INSERT INTO `tbl_cliente`(`nome_do_cliente`,`idade`, `doc`, `endereco`, `numero`) VALUES (?,?,?,?,?)";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(insereCliente);
             ps.setString(1, l.getNome());
-            ps.setString(2, l.getCpf());
-            ps.setString(3, l.getEndereco());
-            ps.setInt(4, l.getNumero());
+            ps.setInt(2, l.getIdade());
+            ps.setString(3, l.getCpf());
+            ps.setString(4, l.getEndereco());
+            ps.setInt(5, l.getNumero());
  
             ps.executeUpdate();
         }catch(SQLException e){
@@ -43,6 +44,7 @@ public class ClienteDao {
                 Cliente l = new Cliente();
                 l.setId(rs.getInt("id_cliente"));
                 l.setNome(rs.getString("nome_do_cliente "));
+                l.setIdade(rs.getInt("idade"));
                 l.setCpf(rs.getString("doc"));
                 l.setEndereco(rs.getString("endereco"));
                 l.setNumero(rs.getInt("numero"));
@@ -70,6 +72,7 @@ public class ClienteDao {
                 Cliente l = new Cliente();
                 l.setId(rs.getInt("id"));
                 l.setNome(rs.getString("nome_do_cliente "));
+                l.setIdade(rs.getInt("idade"));
                 l.setCpf(rs.getString("doc"));
                 l.setEndereco(rs.getString("endereco"));
                 l.setNumero(rs.getInt("numero"));
@@ -85,12 +88,13 @@ public class ClienteDao {
       
             public void alterar(Cliente a) throws Exception{
         try{
-            String alteraCliente = "UPDATE tbl_cliente SET nome_do_cliente =?, doc=?, endereco=?, numero=? WHERE id='"+ a.getId() +"'";
+            String alteraCliente = "UPDATE tbl_cliente SET nome_do_cliente =?, idade=?, doc=?, endereco=?, numero=? WHERE id='"+ a.getId() +"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(alteraCliente);
             ps.setString(1, a.getNome());
-            ps.setString(2, a.getCpf());
-            ps.setString(3, a.getEndereco());
-            ps.setInt(4, a.getNumero());
+            ps.setInt(2, a.getIdade());
+            ps.setString(3, a.getCpf());
+            ps.setString(4, a.getEndereco());
+            ps.setInt(5, a.getNumero());
             
             ps.executeUpdate();
         }catch(SQLException e){
