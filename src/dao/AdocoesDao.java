@@ -10,13 +10,14 @@ import model.Adocoes;
 public class AdocoesDao {
     public void inserir(Adocoes l) throws Exception{
         try{
-            String insereAdocoes = "INSERT INTO `tbl_adocao`( `pk_id_cliente`,`nome_do_cliente`, `pk_id_pet`, `raca`) VALUES (?,?,?,?)";
+            String insereAdocoes = "INSERT INTO `tbl_adocao`(`nome_do_cliente`, `pk_id_cliente`, `raca`,`pk_id_pet`) VALUES (?,?,?,?)";
              PreparedStatement ps = Persistencia.conexao().prepareStatement(insereAdocoes);
-            ps.setInt(1, l.getPk_id_cliente());
-            ps.setString(2, l.getNome_do_cliente());
-            ps.setInt(3, l.getPk_id_pet());
-            ps.setString(4, l.getRaca());
-            
+             
+            ps.setString(1, l.getNome_do_cliente());
+            ps.setInt(2, l.getPk_id_cliente());
+            ps.setString(3, l.getRaca());
+            ps.setInt(4, l.getPk_id_pet());
+
             
             ps.executeUpdate();
         }catch(SQLException e){
@@ -27,7 +28,7 @@ public class AdocoesDao {
      
     public void deletar(Adocoes l) throws Exception{
         try{
-            String deleteAdocoes = "DELETE FROM `tbl_adocao` WHERE id=" + l.getId();
+            String deleteAdocoes = "DELETE FROM `tbl_adocao` WHERE id_adocao=" + l.getId();
             PreparedStatement ps = Persistencia.conexao().prepareStatement(deleteAdocoes);
             ps.executeUpdate();
         }catch(SQLException e){
@@ -35,18 +36,18 @@ public class AdocoesDao {
         }
     }
     
-     public Adocoes listar(int id , int t) throws Exception{
+     public Adocoes listar(String nome_do_cliente , int t) throws Exception{
         try{
-            String sql = "SELECT * FROM `tbl_adocao` WHERE id ='"+ id +"'";
+            String sql = "SELECT * FROM `tbl_adocao` WHERE id_adocao ='"+ nome_do_cliente +"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Adocoes l = new Adocoes();
-                l.setId(rs.getInt("id"));
+                l.setId(rs.getInt("id_adocao")); 
                 l.setNome_do_cliente("nome_do_cliente");
                 l.setPk_id_cliente(rs.getInt("pk_id_cliente"));
-                l.setPk_id_pet(rs.getInt("pk_id_pet"));
-                l.setRaca("raca");               
+                l.setRaca("raca"); 
+                l.setPk_id_pet(rs.getInt("pk_id_pet"));           
                 
                 return l;
             }
@@ -58,35 +59,40 @@ public class AdocoesDao {
     }
       public void alterar(Adocoes a) throws Exception{
         try{
-            String alteraAdocoes = "UPDATE login SET nome_do_cliente=?, pk_id_cliente=?, pk_id_pet=?, raca=? WHERE id='"+ a.getId() +"'";
+            String alteraAdocoes = "UPDATE login SET  nome_do_cliente=?,pk_id_cliente=?, raca=?, pk_id_pet=? WHERE id_adocao='"+ a.getId() +"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(alteraAdocoes);
-            ps.setInt(1, a.getPk_id_cliente());
-            ps.setString(2, a.getNome_do_cliente());
-            ps.setInt(3, a.getPk_id_pet());
-            ps.setString(4, a.getRaca());
+            
+            ps.setString(1, a.getNome_do_cliente());
+            ps.setInt(2, a.getPk_id_cliente());
+            ps.setString(3, a.getRaca());
+            ps.setInt(4, a.getPk_id_pet());
+            
             ps.executeUpdate();
         }catch(SQLException e){
             throw new Exception("Não foi possível executar a alteração.");
         }   
     }
       
-      public ArrayList<Adocoes> listar(String filtro) throws Exception{
+      public ArrayList<Adocoes> listar(String filter) throws Exception{
         try{
             ArrayList<Adocoes> adocao = new ArrayList<Adocoes>();
             String sql = "SELECT * FROM `tbl_adocao` ";
-            if(!filtro.equals("")){
-                sql+=" WHERE LOWER(usuario) LIKE '%"+ filtro.toLowerCase() +"%'";
+            if(!filter.equals("")){
+                sql+=" WHERE LOWER(id_adocao) LIKE '%"+ filter.toLowerCase() +"%'";
             }
-            sql+=" ORDER BY id";
+            sql+=" ORDER BY id_adocao";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Adocoes l = new Adocoes();
-                l.setId(rs.getInt("id"));
+                l.setId(rs.getInt("id_adocao")); 
                 l.setNome_do_cliente("nome_do_cliente");
                 l.setPk_id_cliente(rs.getInt("pk_id_cliente"));
-                l.setPk_id_pet(rs.getInt("pk_id_pet"));
                 l.setRaca("raca"); 
+                l.setPk_id_pet(rs.getInt("pk_id_pet"));
+                
+                adocao.add(l);
+                
             }
             return adocao;
         }                       

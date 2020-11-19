@@ -58,20 +58,21 @@ public class ClienteDao {
         }    
     }
       
-      public ArrayList<Cliente> listar(String filter){
+      public ArrayList<Cliente> listar(String filter) throws Exception{
         try{
             ArrayList<Cliente> cliente = new ArrayList<Cliente>();
             String sql = "SELECT * FROM `tbl_cliente` ";
             if(!filter.equals("")){
-                sql+=" WHERE LOWER(nome_do_cliente) LIKE '%"+ filter.toLowerCase() +"%'";
+                sql+=" WHERE LOWER(id_cliente) LIKE '%"+ filter.toLowerCase() +"%'";
             }
-            sql+=" ORDER BY id";
+            sql+=" ORDER BY id_cliente";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()){
                 Cliente l = new Cliente();
-                l.setId(rs.getInt("id"));
-                l.setNome(rs.getString("nome_do_cliente "));
+                l.setId(rs.getInt("id_cliente"));
+                l.setNome(rs.getString("nome_do_cliente"));
                 l.setIdade(rs.getInt("idade"));
                 l.setCpf(rs.getString("doc"));
                 l.setEndereco(rs.getString("endereco"));
@@ -82,13 +83,13 @@ public class ClienteDao {
             return cliente;
         }                       
         catch(SQLException e){
-                return null;
+                throw new Exception("Não foi possível executar a busca."+e);
         }    
      }
       
             public void alterar(Cliente a) throws Exception{
         try{
-            String alteraCliente = "UPDATE tbl_cliente SET nome_do_cliente =?, idade=?, doc=?, endereco=?, numero=? WHERE id='"+ a.getId() +"'";
+            String alteraCliente = "UPDATE tbl_cliente SET nome_do_cliente =?, idade=?, doc=?, endereco=?, numero=? WHERE id_cliente='"+ a.getId() +"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(alteraCliente);
             ps.setString(1, a.getNome());
             ps.setInt(2, a.getIdade());

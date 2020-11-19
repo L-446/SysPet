@@ -5,7 +5,6 @@
  */
 package view;
 
-import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
@@ -18,8 +17,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import dao.LoginDao;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,10 +26,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import model.Login;
 
 /**
@@ -72,6 +65,7 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -86,12 +80,17 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         jMenuItemAdocoesCadastro = new javax.swing.JMenuItem();
         jMenuEditar = new javax.swing.JMenu();
         jMenuItemUsuarioEditar = new javax.swing.JMenuItem();
+        jMenuItemPetEditar = new javax.swing.JMenuItem();
+        jMenuItemClienteEditar = new javax.swing.JMenuItem();
+        jMenuItemAdocaoEditar = new javax.swing.JMenuItem();
         relatorio = new javax.swing.JMenu();
         jMenuItemRelatorio = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         jMenu2.setText("jMenu2");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Inicial");
@@ -149,7 +148,7 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         jLabel3.setText("Devolped By: Creative Code ");
 
         jMenuCasdastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadastrar.png"))); // NOI18N
-        jMenuCasdastro.setText("Casdastros");
+        jMenuCasdastro.setText("Cadastros");
 
         jMenuItemUsuarioCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add-user.png"))); // NOI18N
         jMenuItemUsuarioCadastro.setText("Usuário");
@@ -200,6 +199,30 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
             }
         });
         jMenuEditar.add(jMenuItemUsuarioEditar);
+
+        jMenuItemPetEditar.setText("Pet");
+        jMenuItemPetEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPetEditarActionPerformed(evt);
+            }
+        });
+        jMenuEditar.add(jMenuItemPetEditar);
+
+        jMenuItemClienteEditar.setText("Cliente");
+        jMenuItemClienteEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClienteEditarActionPerformed(evt);
+            }
+        });
+        jMenuEditar.add(jMenuItemClienteEditar);
+
+        jMenuItemAdocaoEditar.setText("Adoções");
+        jMenuItemAdocaoEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAdocaoEditarActionPerformed(evt);
+            }
+        });
+        jMenuEditar.add(jMenuItemAdocaoEditar);
 
         jMenuBar1.add(jMenuEditar);
 
@@ -365,7 +388,7 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPetCadastroActionPerformed
 
     private void jMenuItemAdocoesCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdocoesCadastroActionPerformed
-        jfrmCadastrarDoacao cadastroDoacao = new jfrmCadastrarDoacao();
+        jfrmCadastrarAdocao cadastroDoacao = new jfrmCadastrarAdocao();
         cadastroDoacao.show();
     }//GEN-LAST:event_jMenuItemAdocoesCadastroActionPerformed
 
@@ -373,6 +396,21 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         jfrmCadastrarCliente cadastroCliente = new jfrmCadastrarCliente();
         cadastroCliente.show();
     }//GEN-LAST:event_jMenuItemClienteCadastroActionPerformed
+
+    private void jMenuItemPetEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPetEditarActionPerformed
+        jfrmEditarPet editarPet = new jfrmEditarPet();
+        editarPet.show();
+    }//GEN-LAST:event_jMenuItemPetEditarActionPerformed
+
+    private void jMenuItemClienteEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteEditarActionPerformed
+        jfrmEditarCliente editarCliente = new jfrmEditarCliente();
+        editarCliente.show();
+    }//GEN-LAST:event_jMenuItemClienteEditarActionPerformed
+
+    private void jMenuItemAdocaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdocaoEditarActionPerformed
+        jfrmEditarAdocao editarAdocao = new jfrmEditarAdocao();
+        editarAdocao.show();
+    }//GEN-LAST:event_jMenuItemAdocaoEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -386,9 +424,13 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCasdastro;
     private javax.swing.JMenu jMenuEditar;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemAdocaoEditar;
     private javax.swing.JMenuItem jMenuItemAdocoesCadastro;
     private javax.swing.JMenuItem jMenuItemClienteCadastro;
+    private javax.swing.JMenuItem jMenuItemClienteEditar;
     private javax.swing.JMenuItem jMenuItemPetCadastro;
+    private javax.swing.JMenuItem jMenuItemPetEditar;
     private javax.swing.JMenuItem jMenuItemRelatorio;
     private javax.swing.JMenuItem jMenuItemUsuarioCadastro;
     private javax.swing.JMenuItem jMenuItemUsuarioEditar;

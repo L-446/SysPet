@@ -5,8 +5,10 @@
  */
 package view;
 
+import controller.MessageObservable;
 import dao.ClienteDao;
 import java.awt.Color;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import model.Cliente;
 
@@ -14,16 +16,24 @@ import model.Cliente;
  *
  * @author leehr
  */
-public class jfrmCadastrarCliente extends javax.swing.JFrame {
+public class jfrmAlterarCliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form jfrmCadastrarCliente
+     * Creates new form jfrmAlterarCliente
      */
-    public jfrmCadastrarCliente() {
+    final MessageObservable observable = new MessageObservable();
+    
+    public jfrmAlterarCliente(jfrmAlterarCliente editarCliente) {
         initComponents();
+        observable.addObserver(editarCliente);
         
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);
+     
+    }
+
+    jfrmAlterarCliente(jfrmEditarCliente aThis) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -35,7 +45,6 @@ public class jfrmCadastrarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBCancelar = new javax.swing.JButton();
         jBSalvar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -51,17 +60,9 @@ public class jfrmCadastrarCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jtxtIdade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jBCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Cliente");
-
-        jBCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jBCancelar.setText("Cancelar");
-        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCancelarActionPerformed(evt);
-            }
-        });
 
         jBSalvar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBSalvar.setText("Salvar");
@@ -162,6 +163,14 @@ public class jfrmCadastrarCliente extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/gato.png"))); // NOI18N
         jLabel8.setText("SYSPET");
 
+        jBCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBCancelar.setText("Cancelar");
+        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,82 +201,50 @@ public class jfrmCadastrarCliente extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-        dispose();
-    }//GEN-LAST:event_jBCancelarActionPerformed
-
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-      if(jtxtNome.getText().length() == 0 ||jtxtIdade.getText().length()== 0 || jtxtDoc.getText().length() == 0 || jtxtEndereco.getText().length() == 0 ||jtxtNumero.getText().length()== 0){
+        if(jtxtNome.getText().length() == 0 ||jtxtIdade.getText().length()== 0 || jtxtDoc.getText().length() == 0 || jtxtEndereco.getText().length() == 0 ||jtxtNumero.getText().length()== 0){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
         }
-           if (jtxtNome.getText().length() >=1 ){
-                try {
-                Cliente cl = new Cliente();
-                cl.setNome(jtxtNome.getText());
-                cl.setIdade(Integer.parseInt(jtxtIdade.getText()));
-                cl.setCpf(jtxtDoc.getText());
-                cl.setEndereco(jtxtEndereco.getText());
-                cl.setNumero(Integer.parseInt(jtxtNumero.getText()));
-                    
-                
-                if((Integer.parseInt(jtxtIdade.getText()) >=21)){
-     
-                ClienteDao cli = new ClienteDao();
-                cli.inserir(cl);
-                JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso.");
+         if (jtxtNome.getText().length() >=1 ){
+            try {
+                Cliente cli = new Cliente();
+                cli.setNome(jtxtNome.getText());
+                cli.setIdade(Integer.parseInt(jtxtIdade.getText()));
+                cli.setCpf(jtxtDoc.getText());
+                cli.setEndereco(jtxtEndereco.getText());
+                cli.setNumero(Integer.parseInt(jtxtNumero.getText()));
+
+                ClienteDao cl = new ClienteDao();
+                cl.inserir(cli);
+
+                JOptionPane.showMessageDialog(null, "Cliente Alterado com sucesso.");
                 hide();
-                } else{
-                   JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro"); 
-                }  
-                
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Falha ao inserir o Cliente." +ex);
-                }
-                
-            
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Falha ao inserir o Cliente." +ex);
+            }
+
         }else{
             JOptionPane.showMessageDialog(null, "Dados não conferem");
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
+    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBCancelarActionPerformed
+
+    private int id;
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return this.id;
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new jfrmCadastrarCliente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;
@@ -281,10 +258,10 @@ public class jfrmCadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JFormattedTextField jtxtDoc;
-    private javax.swing.JTextField jtxtEndereco;
-    private javax.swing.JTextField jtxtIdade;
-    private javax.swing.JTextField jtxtNome;
-    private javax.swing.JTextField jtxtNumero;
+    public javax.swing.JFormattedTextField jtxtDoc;
+    public javax.swing.JTextField jtxtEndereco;
+    public javax.swing.JTextField jtxtIdade;
+    public javax.swing.JTextField jtxtNome;
+    public javax.swing.JTextField jtxtNumero;
     // End of variables declaration//GEN-END:variables
 }

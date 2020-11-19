@@ -181,9 +181,10 @@ public class jfrmCadastroUsuario extends javax.swing.JFrame {
                 Login login = new Login();
                 login.setUsuario(jtxtNome.getText());
                 login.setSenha(jtxtSenha.getText());
+                
                 LoginDao lg = new LoginDao();
                 lg.inserir(login);
-                JOptionPane.showMessageDialog(null, "Dados cadastrados com sucesso.");
+                JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso.");
                 hide();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Falha ao inserir o Usuário.");
