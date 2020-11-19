@@ -194,6 +194,7 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
                 LoginDao ad = new LoginDao();
                 Login l;
                 int teste = 0;
+                
                 l = ad.listar(selectedObject.toString(), teste);
                 jfrmAlterarUsuario altera = new jfrmAlterarUsuario(this);
                 altera.jtxtNomeUsuario.setText(l.getUsuario());

@@ -97,7 +97,7 @@ public class LoginDao{
     }
       public void alterar(Login a) throws Exception{
         try{
-            String alteraUsuario = "UPDATE login SET usuario=?, senha=md5(?) WHERE id='"+ a.getId() +"'";
+            String alteraUsuario = "UPDATE usuario SET usuario=?, senha=md5(?) WHERE id='"+ a.getId() +"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(alteraUsuario);
             ps.setString(1, a.getUsuario());
             ps.setString(2, a.getSenha());

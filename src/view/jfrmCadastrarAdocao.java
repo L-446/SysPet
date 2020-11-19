@@ -15,12 +15,12 @@ import model.Adocoes;
  *
  * @author Jkm
  */
-public class jfrmCadastrarDoacao extends javax.swing.JFrame {
+public class jfrmCadastrarAdocao extends javax.swing.JFrame {
 
     /**
      * Creates new form jfrmCadastrarDoacao
      */
-    public jfrmCadastrarDoacao() {
+    public jfrmCadastrarAdocao() {
         initComponents();
         
         Color minhaCor = new Color(255,228,225);
@@ -173,7 +173,7 @@ public class jfrmCadastrarDoacao extends javax.swing.JFrame {
 
                 AdocoesDao dc = new AdocoesDao();
                 dc.inserir(adc);
-                JOptionPane.showMessageDialog(null, "Dados cadastrados com sucesso.");
+                JOptionPane.showMessageDialog(null, "Adoção cadastrada com sucesso.");
                 hide();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Falha ao inserir o Usuário." +ex);
@@ -205,20 +205,21 @@ public class jfrmCadastrarDoacao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfrmCadastrarAdocao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfrmCadastrarAdocao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfrmCadastrarAdocao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jfrmCadastrarDoacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfrmCadastrarAdocao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jfrmCadastrarDoacao().setVisible(true);
+                new jfrmCadastrarAdocao().setVisible(true);
             }
         });
     }

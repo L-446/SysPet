@@ -6,10 +6,8 @@
 package view;
 
 
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-import java.util.*;
 import controller.MessageObservable;
 import dao.LoginDao;
 import java.awt.Color;
@@ -25,9 +23,9 @@ public class jfrmAlterarUsuario extends javax.swing.JFrame {
      */
     final MessageObservable observable = new MessageObservable();
     
-    public jfrmAlterarUsuario(jfrmEditarUsuario editarAluno) {
+    public jfrmAlterarUsuario(jfrmEditarUsuario editarUser) {
         initComponents();
-        observable.addObserver(editarAluno);
+        observable.addObserver(editarUser);
         
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);
@@ -35,7 +33,7 @@ public class jfrmAlterarUsuario extends javax.swing.JFrame {
     }
 
     jfrmAlterarUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -179,10 +177,11 @@ public class jfrmAlterarUsuario extends javax.swing.JFrame {
                     login.setUsuario(jtxtNomeUsuario.getText());
                     login.setSenha(jtxtSenha.getText());
                     login.setId(this.id);
+                    
                     LoginDao ad = new LoginDao();
                     ad.alterar(login);
                     observable.changeData(login);
-                    JOptionPane.showMessageDialog(null, "Dados cadastrados com sucesso!");
+                    JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
                     hide();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Falha ao inserir o Usuario! " + ex.getMessage());

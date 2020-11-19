@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.JOptionPane;
-
 public class Cliente {
     private int id;
     private String nome;
@@ -73,7 +71,7 @@ public class Cliente {
     }
 
     /**
-     * @param endereço the endereço to set
+     * @param endereco
      */
     public void setEndereco(String endereco) {
         this.endereco = endereco;

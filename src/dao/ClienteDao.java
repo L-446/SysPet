@@ -68,10 +68,11 @@ public class ClienteDao {
             sql+=" ORDER BY id";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()){
                 Cliente l = new Cliente();
                 l.setId(rs.getInt("id"));
-                l.setNome(rs.getString("nome_do_cliente "));
+                l.setNome(rs.getString("nome_do_cliente"));
                 l.setIdade(rs.getInt("idade"));
                 l.setCpf(rs.getString("doc"));
                 l.setEndereco(rs.getString("endereco"));

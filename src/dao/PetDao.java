@@ -43,7 +43,7 @@ public void inserir(Pet l) throws Exception{
                 Pet l = new Pet();
                 l.setId(rs.getInt("id"));
                 l.setRaca(rs.getString("raca"));
-                l.setRaca(rs.getString("sexo"));
+                l.setSexo(rs.getString("sexo"));
                 l.setIdade(rs.getInt("idade"));
                 l.setPeso(rs.getDouble("peso"));
                 l.setVacinas(rs.getString("vacinas"));
@@ -67,14 +67,16 @@ public void inserir(Pet l) throws Exception{
             sql+=" ORDER BY id";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+           
             while(rs.next()){
                 Pet l = new Pet();
                 l.setId(rs.getInt("id"));
                 l.setRaca(rs.getString("raca"));
-                l.setRaca(rs.getString("sexo"));
+                l.setSexo(rs.getString("sexo"));
                 l.setIdade(rs.getInt("idade"));
                 l.setPeso(rs.getDouble("peso"));
                 l.setVacinas(rs.getString("vacinas"));
+                
                 pet.add(l);
             }
             return pet;
@@ -90,8 +92,8 @@ public void inserir(Pet l) throws Exception{
             PreparedStatement ps = Persistencia.conexao().prepareStatement(alteraPet);
             ps.setString(1, a.getRaca());
             ps.setString(2, a.getSexo());
-            ps.setDouble(3, a.getPeso());
-            ps.setInt(4, a.getIdade());
+            ps.setInt(3, a.getIdade());
+            ps.setDouble(4, a.getPeso());
             ps.setString(5, a.getVacinas());
             ps.executeUpdate();
         }catch(SQLException e){
