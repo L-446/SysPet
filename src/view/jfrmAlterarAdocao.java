@@ -183,7 +183,7 @@ public class jfrmAlterarAdocao extends javax.swing.JFrame {
                     adocao.setPk_id_cliente(Integer.parseInt(jtxtIdCliente.getText()));
                     adocao.setRaca(jtxtRaca.getText());
                     adocao.setPk_id_pet(Integer.parseInt(jtxtIdPet.getText()));
-                    adocao.setId(this.id);
+                    adocao.setId_adocao(this.id);
                     
                     AdocoesDao ad = new AdocoesDao();
                     ad.alterar(adocao);

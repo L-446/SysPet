@@ -41,6 +41,7 @@ public void inserir(Pet l) throws Exception{
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Pet l = new Pet();
+                
                 l.setId(rs.getInt("id"));
                 l.setRaca(rs.getString("raca"));
                 l.setSexo(rs.getString("sexo"));

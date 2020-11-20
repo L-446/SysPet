@@ -42,8 +42,9 @@ public class ClienteDao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Cliente l = new Cliente();
+                
                 l.setId(rs.getInt("id_cliente"));
-                l.setNome(rs.getString("nome_do_cliente "));
+                l.setNome(rs.getString("nome_do_cliente"));
                 l.setIdade(rs.getInt("idade"));
                 l.setCpf(rs.getString("doc"));
                 l.setEndereco(rs.getString("endereco"));
@@ -54,7 +55,7 @@ public class ClienteDao {
             return null;
         }                       
         catch(SQLException e){
-                throw new Exception("Não foi possível executar a busca.");
+                throw new Exception("Não foi possível executar a busca."+e);
         }    
     }
       

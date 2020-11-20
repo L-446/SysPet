@@ -28,7 +28,7 @@ public class AdocoesDao {
      
     public void deletar(Adocoes l) throws Exception{
         try{
-            String deleteAdocoes = "DELETE FROM `tbl_adocao` WHERE id_adocao=" + l.getId();
+            String deleteAdocoes = "DELETE FROM `tbl_adocao` WHERE id_adocao=" + l.getId_adocao();
             PreparedStatement ps = Persistencia.conexao().prepareStatement(deleteAdocoes);
             ps.executeUpdate();
         }catch(SQLException e){
@@ -38,12 +38,13 @@ public class AdocoesDao {
     
      public Adocoes listar(String nome_do_cliente , int t) throws Exception{
         try{
-            String sql = "SELECT * FROM `tbl_adocao` WHERE id_adocao ='"+ nome_do_cliente +"'";
+            String sql = "SELECT * FROM `tbl_adocao` WHERE nome_do_cliente ='"+ nome_do_cliente +"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Adocoes l = new Adocoes();
-                l.setId(rs.getInt("id_adocao")); 
+                
+                l.setId_adocao(rs.getInt("id_adocao"));
                 l.setNome_do_cliente("nome_do_cliente");
                 l.setPk_id_cliente(rs.getInt("pk_id_cliente"));
                 l.setRaca("raca"); 
@@ -59,7 +60,7 @@ public class AdocoesDao {
     }
       public void alterar(Adocoes a) throws Exception{
         try{
-            String alteraAdocoes = "UPDATE login SET  nome_do_cliente=?,pk_id_cliente=?, raca=?, pk_id_pet=? WHERE id_adocao='"+ a.getId() +"'";
+            String alteraAdocoes = "UPDATE login SET  nome_do_cliente=?,pk_id_cliente=?, raca=?, pk_id_pet=? WHERE id_adocao='"+ a.getId_adocao()+"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(alteraAdocoes);
             
             ps.setString(1, a.getNome_do_cliente());
@@ -83,9 +84,10 @@ public class AdocoesDao {
             sql+=" ORDER BY id_adocao";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()){
                 Adocoes l = new Adocoes();
-                l.setId(rs.getInt("id_adocao")); 
+                l.setId_adocao(rs.getInt("id_adocao")); 
                 l.setNome_do_cliente("nome_do_cliente");
                 l.setPk_id_cliente(rs.getInt("pk_id_cliente"));
                 l.setRaca("raca"); 

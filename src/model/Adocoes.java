@@ -1,7 +1,7 @@
 package model;
 
 public class Adocoes {
-  private int id;
+  private int id_adocao;
   private int pk_id_cliente;
   private String nome_do_cliente;
   private int pk_id_pet;
@@ -9,6 +9,7 @@ public class Adocoes {
   
   
    public Adocoes(int pk_id_pet, String nome_do_cliente, int pk_id_cliente, String raca){
+       
        this.pk_id_cliente = pk_id_cliente;
        this.nome_do_cliente = nome_do_cliente;
        this.pk_id_pet = pk_id_pet;
@@ -23,17 +24,7 @@ public class Adocoes {
     /**
      * @return the id
      */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     /**
      * @return the pk_id_cliente
      */
@@ -88,6 +79,20 @@ public class Adocoes {
      */
     public void setRaca(String raca) {
         this.raca = raca;
+    }
+
+    /**
+     * @return the id_adocao
+     */
+    public int getId_adocao() {
+        return id_adocao;
+    }
+
+    /**
+     * @param id_adocao the id_adocao to set
+     */
+    public void setId_adocao(int id_adocao) {
+        this.id_adocao = id_adocao;
     }
 
  

@@ -18,6 +18,7 @@ import model.Pet;
  */
 public class jfrmAlterarPet extends javax.swing.JFrame {
 
+     Pet p = new Pet();
     /**
      * Creates new form jfrmAlterarPet
      */

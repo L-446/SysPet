@@ -32,7 +32,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             adocoes = lg.listar("");
             for (Adocoes a : adocoes) {
                 DefaultTableModel model = (DefaultTableModel) tbAdocao.getModel();
-                Object linha[] = new Object[]{a.getId(), a.getNome_do_cliente(), a.getPk_id_cliente(), a.getRaca(), a.getPk_id_pet()};
+                Object linha[] = new Object[]{a.getId_adocao(), a.getNome_do_cliente(), a.getPk_id_cliente(), a.getRaca(), a.getPk_id_pet()};
                 model.addRow(linha);
             }
 
@@ -60,8 +60,14 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
         jBCancelar = new javax.swing.JButton();
         jBExcluirUsuario = new javax.swing.JButton();
         jBAlterarUsuario = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Adoção");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jPanel1.setBackground(new java.awt.Color(255, 228, 225));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Adoção", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         tbAdocao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,9 +77,16 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
                 "Id", "Nome do Cliente", "Id do Cliente", "Raça", "Id do Pet"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, true, true, true, true
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -99,7 +112,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
                     .addComponent(jTextFieldPesquisa)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -107,10 +120,10 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jBCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBCancelar.setText("Cancelar");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +131,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             }
         });
 
+        jBExcluirUsuario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBExcluirUsuario.setText("Excluir");
         jBExcluirUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +139,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             }
         });
 
+        jBAlterarUsuario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBAlterarUsuario.setText("Alterar");
         jBAlterarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,36 +147,40 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/hamster.png"))); // NOI18N
+        jLabel4.setText("SYSPET");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBCancelar)
-                        .addGap(56, 56, 56)
-                        .addComponent(jBExcluirUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBAlterarUsuario)
-                        .addGap(21, 21, 21))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBCancelar)
+                        .addGap(51, 51, 51)
+                        .addComponent(jBExcluirUsuario)
+                        .addGap(59, 59, 59)
+                        .addComponent(jBAlterarUsuario)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
                     .addComponent(jBCancelar)
                     .addComponent(jBExcluirUsuario)
                     .addComponent(jBAlterarUsuario))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,11 +202,13 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
 
                 Adocoes a;
                 int teste = 1;
+                
                 a = ad.listar(selectedObject.toString(),teste);
                 ad.deletar(a);
+                
                 ArrayList<Adocoes> newArrayList = new ArrayList<Adocoes>();
                 for (Adocoes adocao : adocoes) {
-                    if (a.getId() != adocao.getId()) {
+                    if (a.getId_adocao()!= adocao.getId_adocao()) {
                         newArrayList.add(adocao);
                     }
                 }
@@ -197,7 +218,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
                 atualizaTabela();
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao deletar usuario!");
+                JOptionPane.showMessageDialog(null, "Falha ao deletar Adoção!");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");
@@ -215,7 +236,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             }
             for (Adocoes a : adocaoMatch) {
                 DefaultTableModel model = (DefaultTableModel) tbAdocao.getModel();
-                Object linha[] = new Object[]{a.getId(),a.getNome_do_cliente(), a.getPk_id_cliente(), a.getRaca(), a.getPk_id_pet()};
+                Object linha[] = new Object[]{a.getId_adocao(),a.getNome_do_cliente(), a.getPk_id_cliente(), a.getRaca(), a.getPk_id_pet()};
                 model.addRow(linha);
             }
 
@@ -236,7 +257,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             adocoes = adc.listar("");
             for (Adocoes ad : adocoes) {
                 DefaultTableModel model = (DefaultTableModel) tbAdocao.getModel();
-                Object linha[] = new Object[]{ad.getId(), ad.getNome_do_cliente(), ad.getPk_id_cliente(), ad.getRaca(), ad.getPk_id_pet() };
+                Object linha[] = new Object[]{ad.getId_adocao(), ad.getNome_do_cliente(), ad.getPk_id_cliente(), ad.getRaca(), ad.getPk_id_pet() };
                 model.addRow(linha);
             }
 
@@ -255,12 +276,13 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
 
                 l = ad.listar(selectedObject.toString(), teste);
                 jfrmAlterarAdocao altera = new jfrmAlterarAdocao(this);
+                
+                altera.setId(l.getId_adocao());
                 altera.jtxtNomeCliente.setText(l.getNome_do_cliente());
                 altera.jtxtIdCliente.setText(Integer.toString(l.getPk_id_cliente()));
                 altera.jtxtRaca.setText(l.getRaca());
                 altera.jtxtIdPet.setText(Integer.toString(l.getPk_id_pet()));
                 
-                altera.setId(l.getId());
                 altera.show();
 
             } catch (Exception ex) {
@@ -318,6 +340,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
     private javax.swing.JButton jBAlterarUsuario;
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBExcluirUsuario;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldPesquisa;
@@ -328,7 +351,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
         Adocoes adocao = (Adocoes) obj;
         ArrayList<Adocoes> newArrayList = new ArrayList<Adocoes>();
         for (Adocoes a : adocoes) {
-            if (a.getId() == adocao.getId()) {
+            if (a.getId_adocao()== adocao.getId_adocao()) {
                 newArrayList.add(adocao);
             } else {
                 newArrayList.add(a);

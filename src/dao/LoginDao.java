@@ -83,7 +83,9 @@ public class LoginDao{
             PreparedStatement ps = Persistencia.conexao().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
+                
                 Login l = new Login();
+                
                 l.setId(rs.getInt("id"));
                 l.setUsuario(rs.getString("usuario"));
                 //l.setSenha(rs.getString("senha"));
@@ -93,7 +95,7 @@ public class LoginDao{
             return null;
         }                       
         catch(SQLException e){
-                throw new Exception("Não foi possível executar a busca.");
+                throw new Exception("Não foi possível executar a busca."+e);
         }    
     }
       public void alterar(Login a) throws Exception{
