@@ -5,21 +5,12 @@
  */
 package view;
 
-import controller.JTableController;
-import dao.PetDao;
-import java.awt.Color;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import model.Pet;
-
 /**
  *
  * @author leehr
  */
 public class jfrmEditarPet extends javax.swing.JFrame {
 
-    private ArrayList<Pet> pets;
     /**
      * Creates new form jfrmEditarPet
      */
@@ -33,7 +24,7 @@ public class jfrmEditarPet extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) tbPet.getModel();
                 Object linha[] = new Object[]{p.getId(), p.getRaca(), p.getSexo(), p.getIdade(), p.getPeso(), p.getVacinas()};
                 model.addRow(linha);
-            }
+    }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao listar Pet.");
@@ -52,126 +43,27 @@ public class jfrmEditarPet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbPet = new javax.swing.JTable();
-        jTextFieldPesquisa = new javax.swing.JTextField();
-        jbAlterar = new javax.swing.JButton();
-        jbExcluir = new javax.swing.JButton();
-        jbCancelar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        tbPet.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Raça", "Sexo", "Idade", "Peso", "Vacinas"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tbPet);
-
-        jTextFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPesquisaActionPerformed(evt);
-            }
-        });
-        jTextFieldPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldPesquisaKeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldPesquisa)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jbAlterar.setText("Alterar");
-        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAlterarActionPerformed(evt);
-            }
-        });
-
-        jbExcluir.setText("Excluir");
-        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbExcluirActionPerformed(evt);
-            }
-        });
-
-        jbCancelar.setText("Cancelar");
-        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCancelarActionPerformed(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbCancelar)
-                        .addGap(58, 58, 58)
-                        .addComponent(jbExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbAlterar)))
-                .addContainerGap())
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAlterar)
-                    .addComponent(jbExcluir)
-                    .addComponent(jbCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         dispose();
-    }//GEN-LAST:event_jbCancelarActionPerformed
+    }                                          
 
-    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {                                          
          if (tbPet.getSelectedRow() > -1) {
             try {
                 Object selectedObject = (Object) tbPet.getModel().getValueAt(tbPet.getSelectedRow(), 1);
@@ -198,17 +90,17 @@ public class jfrmEditarPet extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");
         }
-    }//GEN-LAST:event_jbAlterarActionPerformed
+    }                                         
 
-    private void jTextFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaActionPerformed
+    private void jTextFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPesquisaActionPerformed
+    }                                                  
 
-    private void jTextFieldPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaKeyPressed
+    private void jTextFieldPesquisaKeyPressed(java.awt.event.KeyEvent evt) {                                              
         fillTable();
-    }//GEN-LAST:event_jTextFieldPesquisaKeyPressed
+    }                                             
 
-    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                          
         if (tbPet.getSelectedRow() > -1) {
             try {
 
@@ -237,7 +129,7 @@ public class jfrmEditarPet extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");
         }
-    }//GEN-LAST:event_jbExcluirActionPerformed
+    }                                         
 
     private void fillTable() {
         try {
@@ -315,12 +207,5 @@ public class jfrmEditarPet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldPesquisa;
-    private javax.swing.JButton jbAlterar;
-    private javax.swing.JButton jbCancelar;
-    private javax.swing.JButton jbExcluir;
-    private javax.swing.JTable tbPet;
     // End of variables declaration//GEN-END:variables
 }

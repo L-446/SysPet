@@ -25,7 +25,9 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
     
     public jfrmAlterarCliente(jfrmAlterarCliente editarCliente) {
         initComponents();
+
         observable.addObserver(editarCliente);
+
         
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);

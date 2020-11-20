@@ -8,6 +8,7 @@ package view;
 import controller.MessageObservable;
 import dao.PetDao;
 import java.awt.Color;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import model.Pet;
 
@@ -34,7 +35,6 @@ public class jfrmAlterarPet extends javax.swing.JFrame {
     jfrmAlterarPet(jfrmEditarPet aThis) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.

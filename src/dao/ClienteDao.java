@@ -71,6 +71,7 @@ public class ClienteDao {
             
             while(rs.next()){
                 Cliente l = new Cliente();
+                
                 l.setId(rs.getInt("id_cliente"));
                 l.setNome(rs.getString("nome_do_cliente"));
                 l.setIdade(rs.getInt("idade"));
