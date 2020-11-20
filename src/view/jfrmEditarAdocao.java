@@ -271,22 +271,23 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
             try {
                 Object selectedObject = (Object) tbAdocao.getModel().getValueAt(tbAdocao.getSelectedRow(), 1);
                 AdocoesDao ad = new AdocoesDao();
-                Adocoes l;
+                Adocoes a;
                 int teste = 0;
-
-                l = ad.listar(selectedObject.toString(), teste);
+                
+                a = ad.listar(selectedObject.toString(), teste);
                 jfrmAlterarAdocao altera = new jfrmAlterarAdocao(this);
                 
-                altera.setId(l.getId_adocao());
-                altera.jtxtNomeCliente.setText(l.getNome_do_cliente());
-                altera.jtxtIdCliente.setText(Integer.toString(l.getPk_id_cliente()));
-                altera.jtxtRaca.setText(l.getRaca());
-                altera.jtxtIdPet.setText(Integer.toString(l.getPk_id_pet()));
-                
+                altera.jtxtNomeCliente.setText(a.getNome_do_cliente());
+                altera.jtxtIdCliente.setText(Integer.toString(a.getPk_id_cliente()));
+                altera.jtxtRaca.setText(a.getRaca());
+                altera.jtxtIdPet.setText(Integer.toString(a.getPk_id_pet()));
+
+              
+                altera.setId(a.getId_adocao());
                 altera.show();
 
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao preencher formulário!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");

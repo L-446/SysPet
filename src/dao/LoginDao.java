@@ -57,6 +57,7 @@ public class LoginDao{
                 l.setId(rs.getInt("id"));
                 l.setUsuario(rs.getString("usuario"));
                 //l.setSenha(rs.getString("senha"));
+                
                 login.add(l);
             }
             return login;

@@ -60,7 +60,7 @@ public class AdocoesDao {
     }
       public void alterar(Adocoes a) throws Exception{
         try{
-            String alteraAdocoes = "UPDATE login SET  nome_do_cliente=?,pk_id_cliente=?, raca=?, pk_id_pet=? WHERE id_adocao='"+ a.getId_adocao()+"'";
+            String alteraAdocoes = "UPDATE login SET  nome_do_cliente=?, pk_id_cliente=?, raca=?, pk_id_pet=? WHERE id_adocao='"+ a.getId_adocao()+"'";
             PreparedStatement ps = Persistencia.conexao().prepareStatement(alteraAdocoes);
             
             ps.setString(1, a.getNome_do_cliente());
@@ -87,14 +87,14 @@ public class AdocoesDao {
             
             while(rs.next()){
                 Adocoes l = new Adocoes();
+                
                 l.setId_adocao(rs.getInt("id_adocao")); 
-                l.setNome_do_cliente("nome_do_cliente");
+                l.setNome_do_cliente(rs.getString("nome_do_cliente"));
                 l.setPk_id_cliente(rs.getInt("pk_id_cliente"));
-                l.setRaca("raca"); 
+                l.setRaca(rs.getString("raca")); 
                 l.setPk_id_pet(rs.getInt("pk_id_pet"));
                 
                 adocao.add(l);
-                
             }
             return adocao;
         }                       
