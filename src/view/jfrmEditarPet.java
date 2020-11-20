@@ -16,22 +16,6 @@ public class jfrmEditarPet extends javax.swing.JFrame {
      */
     public jfrmEditarPet() {
         initComponents();
-
-        try {
-            PetDao pt = new PetDao();
-            pets = pt.listar("");
-            for (Pet p : pets) {
-                DefaultTableModel model = (DefaultTableModel) tbPet.getModel();
-                Object linha[] = new Object[]{p.getId(), p.getRaca(), p.getSexo(), p.getIdade(), p.getPeso(), p.getVacinas()};
-                model.addRow(linha);
-    }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar Pet.");
-        }
-        
-        Color minhaCor = new Color(255,228,225);
-        getContentPane().setBackground(minhaCor);
     }
 
     /**
@@ -43,7 +27,7 @@ public class jfrmEditarPet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,120 +41,9 @@ public class jfrmEditarPet extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        dispose();
-    }                                          
-
-    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {                                          
-         if (tbPet.getSelectedRow() > -1) {
-            try {
-                Object selectedObject = (Object) tbPet.getModel().getValueAt(tbPet.getSelectedRow(), 1);
-                PetDao pd = new PetDao();
-                Pet p;
-                int teste = 0;
-                
-                p = pd.listar(selectedObject.toString(), teste);
-                jfrmAlterarPet altera = new jfrmAlterarPet(this);
-                
-                //altera.setId(p.getId());
-                altera.jtxtRaca.setText(p.getRaca());
-                altera.jtxtSexo.setText(p.getSexo());
-                altera.jtxtIdade.setText(Integer.toString(p.getIdade()));
-                altera.jtxtPeso.setText(Double.toString(p.getPeso()));
-                altera.jtxtVacina.setText(p.getVacinas());
-                
-                //altera.show();
-                
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao preencher formulário!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");
-        }
-    }                                         
-
-    private void jTextFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
-    }                                                  
-
-    private void jTextFieldPesquisaKeyPressed(java.awt.event.KeyEvent evt) {                                              
-        fillTable();
-    }                                             
-
-    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        if (tbPet.getSelectedRow() > -1) {
-            try {
-
-                Object selectedObject = (Object) tbPet.getModel().getValueAt(tbPet.getSelectedRow(), 1);
-
-                PetDao lg = new PetDao();
-
-                Pet l;
-                int teste = 1;
-                l = lg.listar(selectedObject.toString(), teste);
-                lg.deletar(l);
-                ArrayList<Pet> newArrayList = new ArrayList<Pet>();
-                for (Pet pt : pets) {
-                    if (l.getId() != pt.getId()) {
-                        newArrayList.add(pt);
-                    }
-                }
-                pets = newArrayList;
-                JOptionPane.showMessageDialog(null, "Dados Excluidos!");
-
-                atualizaTabela();
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao deletar Pet!" );
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");
-        }
-    }                                         
-
-    private void fillTable() {
-        try {
-            ArrayList<Pet> loginMatch = new ArrayList<Pet>(); //= ad.listar(jTextFieldPesquisa.getText());
-            JTableController.limpaJTable(tbPet);
-            for (Pet p : pets) {
-                if (p.getRaca().toLowerCase().startsWith(jTextFieldPesquisa.getText().toLowerCase())) {
-                    loginMatch.add(p);
-                }
-            }
-            for (Pet pt : loginMatch) {
-                DefaultTableModel model = (DefaultTableModel) tbPet.getModel();
-                Object linha[] = new Object[]{pt.getId(), pt.getRaca(), pt.getSexo(), pt.getIdade(), pt.getPeso(), pt.getVacinas()};
-                model.addRow(linha);
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar Pet.");
-        }
-
-    }
-
-    public void atualizaTabela() {
-        try {
-
-            DefaultTableModel modelExcluir = (DefaultTableModel) tbPet.getModel();
-            while (modelExcluir.getRowCount() > 0) {
-                modelExcluir.removeRow(0);
-            }
-            PetDao pt = new PetDao();
-            pets = pt.listar("");
-            for (Pet pts : pets) {
-                DefaultTableModel model = (DefaultTableModel) tbPet.getModel();
-                Object linha[] = new Object[]{pts.getId(), pts.getRaca(), pts.getSexo(), pts.getIdade(), pts.getPeso(), pts.getVacinas()};
-                model.addRow(linha);
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar Pet.");
-        }
-    }
     /**
      * @param args the command line arguments
      */
