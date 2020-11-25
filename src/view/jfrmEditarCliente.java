@@ -5,10 +5,13 @@
  */
 package view;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import controller.JTableController;
 import dao.ClienteDao;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
@@ -17,21 +20,24 @@ import model.Cliente;
  *
  * @author leehr
  */
-public class jfrmEditarCliente extends javax.swing.JFrame {
+public class jfrmEditarCliente extends javax.swing.JFrame implements Observer {
 
+     public int id;
+    
     private ArrayList<Cliente> clientes;
     /**
      * Creates new form jfrmEditarCliente
      */
      public jfrmEditarCliente() {
         initComponents();
-        // this.telaCadastro = telaCadastro;
-        try {
+        
+               try {
             ClienteDao cd = new ClienteDao();
             clientes = cd.listar("");
             for (Cliente c : clientes) {
                 DefaultTableModel model = (DefaultTableModel) tbCliente.getModel();
-                Object linha[] = new Object[]{c.getId(), c.getNome(), c.getIdade(), c.getCpf(), c.getEndereco(), c.getNumero()};
+                Object linha[] = new Object[]{c.getId(), c.getNome(), c.getIdade(), c.getCpf(), c.getEndereco(), c.getNumero()};             
+                tbCliente.revalidate();
                 model.addRow(linha);
             }
 
@@ -39,6 +45,7 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao listar Cliente." +ex);
         }
         
+       
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);
     }
@@ -56,12 +63,17 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCliente = new javax.swing.JTable();
         jTextFieldPesquisa = new javax.swing.JTextField();
-        jbAlterar = new javax.swing.JButton();
+        jBAlterar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 228, 225));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
@@ -114,11 +126,11 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
                 .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jbAlterar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jbAlterar.setText("Alterar");
-        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
+        jBAlterar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBAlterar.setText("Alterar");
+        jBAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAlterarActionPerformed(evt);
+                jBAlterarActionPerformed(evt);
             }
         });
 
@@ -159,7 +171,7 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
                         .addGap(66, 66, 66)
                         .addComponent(jbExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbAlterar)
+                        .addComponent(jBAlterar)
                         .addGap(16, 16, 16))))
         );
         layout.setVerticalGroup(
@@ -170,7 +182,7 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbAlterar)
+                        .addComponent(jBAlterar)
                         .addComponent(jbExcluir)
                         .addComponent(jbCancelar))
                     .addComponent(jLabel8))
@@ -189,10 +201,10 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
         fillTable();
     }//GEN-LAST:event_jTextFieldPesquisaKeyPressed
 
-    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+    private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
           if (tbCliente.getSelectedRow() > -1) {
             try {
-                Object selectedObject = (Object) tbCliente.getModel().getValueAt(tbCliente.getSelectedRow(), 1);
+                /*Object selectedObject = (Object) tbCliente.getModel().getValueAt(tbCliente.getSelectedRow(), 1);
                 ClienteDao ad = new ClienteDao();
                 Cliente c;
                 int teste = 0;
@@ -200,22 +212,33 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
                 c = ad.listar(selectedObject.toString(), teste);
                 jfrmAlterarCliente altera = new jfrmAlterarCliente(this);
                 
-                altera.jtxtNome.setText(c.getNome());
-                altera.jtxtIdade.setText(String.valueOf(c.getIdade()));
-                altera.jtxtDoc.setText(String.valueOf(c.getCpf()));
-                altera.jtxtEndereco.setText(c.getEndereco());
-                altera.jtxtNumero.setText(String.valueOf(c.getNumero()));
-              
                 altera.setId(c.getId());
-                altera.show();
+                altera.jtxtNome.setText(c.getNome());
+                altera.jtxtIdade.setText(Integer.toString(c.getIdade()));
+                altera.jtxtDoc.setText(c.getCpf());
+                altera.jtxtEndereco.setText(c.getEndereco());
+                altera.jtxtNumero.setText(Integer.toString(c.getNumero()));
+              
+                altera.show();*/
+                
+               
+                id = (int) tbCliente.getModel().getValueAt(tbCliente.getSelectedRow(), 0);
+                
+                jfrmAlterarCliente alterar = new jfrmAlterarCliente();
+                alterar.id_cliente = this.id;
+                
+                //alterar.setModal(true);
+                alterar.setVisible(true);  
+                
+                
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                 JOptionPane.showMessageDialog(null, "Falha ao preencher formulário!" +e);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");
         }
-    }//GEN-LAST:event_jbAlterarActionPerformed
+    }//GEN-LAST:event_jBAlterarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
       dispose();
@@ -246,12 +269,16 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
                 atualizaTabela();
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao deletar Cliente!" );
+                JOptionPane.showMessageDialog(null, "Falha ao deletar Cliente!"+ex );
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+  
+    }//GEN-LAST:event_formWindowActivated
 
     private void fillTable() {
         try {
@@ -330,13 +357,30 @@ public class jfrmEditarCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAlterar;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldPesquisa;
-    private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JTable tbCliente;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object obj) {
+        Cliente c = (Cliente) obj;
+        ArrayList<Cliente> newArrayList = new ArrayList<Cliente>();
+        for (Cliente a : clientes) {
+            if (a.getId() == c.getId()) {
+                newArrayList.add(c);
+            } else {
+                newArrayList.add(a);
+            }
+        }
+        clientes = newArrayList;
+        fillTable();
+        atualizaTabela();
+
+    }
 }

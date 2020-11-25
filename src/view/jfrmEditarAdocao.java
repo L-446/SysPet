@@ -20,7 +20,8 @@ import model.Adocoes;
  */
 public class jfrmEditarAdocao extends javax.swing.JFrame {
 
-      private ArrayList<Adocoes> adocoes;
+    public int id_adocao1;
+    private ArrayList<Adocoes> adocoes;
     /**
      * Creates new form jfrmEditarAdocao
      */
@@ -269,7 +270,7 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
     private void jBAlterarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarUsuarioActionPerformed
         if (tbAdocao.getSelectedRow() > -1) {
             try {
-                Object selectedObject = (Object) tbAdocao.getModel().getValueAt(tbAdocao.getSelectedRow(), 1);
+                /*Object selectedObject = (Object) tbAdocao.getModel().getValueAt(tbAdocao.getSelectedRow(), 1);
                 AdocoesDao ad = new AdocoesDao();
                 Adocoes a;
                 int teste = 0;
@@ -284,10 +285,18 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
 
               
                 altera.setId(a.getId_adocao());
-                altera.show();
+                altera.show();*/
+                
+                id_adocao1 = (int) tbAdocao.getModel().getValueAt(tbAdocao.getSelectedRow(), 0);
+                
+                jfrmAlterarAdocao alterar = new jfrmAlterarAdocao();
+                alterar.id_adocao1 = this.id_adocao1;
+                
+                //alterar.setModal(true);
+                alterar.setVisible(true);  
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                JOptionPane.showMessageDialog(null,"Falha ao preencher formulário!" +e);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para continuar!");

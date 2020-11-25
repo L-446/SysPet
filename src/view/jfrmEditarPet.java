@@ -19,6 +19,7 @@ import model.Pet;
  */
 public class jfrmEditarPet extends javax.swing.JDialog {
 
+    public int id_pet;
       private ArrayList<Pet> pets;
 
 
@@ -195,7 +196,7 @@ public class jfrmEditarPet extends javax.swing.JDialog {
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
         if (tbPet.getSelectedRow() > -1) {
             try {
-                Object selectedObject = (Object) tbPet.getModel().getValueAt(tbPet.getSelectedRow(), 1);
+                /*Object selectedObject = (Object) tbPet.getModel().getValueAt(tbPet.getSelectedRow(), 1);
                 PetDao pd = new PetDao();
                 Pet p;
                 int teste = 0;
@@ -210,7 +211,15 @@ public class jfrmEditarPet extends javax.swing.JDialog {
                 altera.jtxtPeso.setText(Double.toString(p.getPeso()));
                 altera.jtxtVacina.setText(p.getVacinas());
                 
-                altera.show();
+                altera.show();*/
+                
+                id_pet = (int) tbPet.getModel().getValueAt(tbPet.getSelectedRow(), 0);
+
+                jfrmAlterarPet alterar = new jfrmAlterarPet();
+                alterar.id_peta = this.id_pet;
+                
+                //alterar.setModal(true);
+                alterar.setVisible(true); 
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Falha ao preencher formulário!");

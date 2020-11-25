@@ -5,10 +5,8 @@
  */
 package view;
 
-import controller.MessageObservable;
 import dao.ClienteDao;
 import java.awt.Color;
-import java.util.Observer;
 import javax.swing.JOptionPane;
 import model.Cliente;
 
@@ -18,24 +16,20 @@ import model.Cliente;
  */
 public class jfrmAlterarCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jfrmAlterarCliente
-     */
-    final MessageObservable observable = new MessageObservable();
+    Cliente c = new Cliente();
+    ClienteDao cd = new ClienteDao();
+    public int id_cliente;
+    //private Object observable;
     
-    public jfrmAlterarCliente(jfrmAlterarCliente editarCliente) {
-        initComponents();
-
-        observable.addObserver(editarCliente);
-
+    
+    /**
+     * Creates new form jfrmAlterarClienteOk
+     */
+    public jfrmAlterarCliente() {
+        initComponents();  
         
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);
-     
-    }
-
-    jfrmAlterarCliente(jfrmEditarCliente aThis) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -47,7 +41,6 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBSalvar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtxtNome = new javax.swing.JTextField();
@@ -62,15 +55,16 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jtxtIdade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jBSalvar = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jBSalvar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jBSalvar.setText("Salvar");
-        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalvarActionPerformed(evt);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -165,6 +159,14 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/gato.png"))); // NOI18N
         jLabel8.setText("SYSPET");
 
+        jBSalvar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBSalvar.setText("Salvar");
+        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalvarActionPerformed(evt);
+            }
+        });
+
         jBCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBCancelar.setText("Cancelar");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -177,55 +179,67 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBCancelar)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(321, Short.MAX_VALUE)
+                .addComponent(jBSalvar)
+                .addGap(30, 30, 30)
+                .addComponent(jBCancelar)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addGap(421, 421, 421)))
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(243, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalvar)
-                    .addComponent(jBCancelar)
-                    .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBCancelar))
+                .addGap(22, 22, 22))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel8)
+                    .addContainerGap(21, Short.MAX_VALUE)))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-        if(jtxtNome.getText().length() == 0 ||jtxtIdade.getText().length()== 0 || jtxtDoc.getText().length() == 0 || jtxtEndereco.getText().length() == 0 ||jtxtNumero.getText().length()== 0){
+         if(jtxtNome.getText().length() == 0 ||jtxtIdade.getText().length()== 0 || jtxtDoc.getText().length() == 0 || jtxtEndereco.getText().length() == 0 ||jtxtNumero.getText().length()== 0){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
         }
-         if (jtxtNome.getText().length() >=1 ){
+          if (jtxtNome.getText().length() >= 1 ){
             try {
                 Cliente cli = new Cliente();
+                 
+                cli.setId(c.getId());
                 cli.setNome(jtxtNome.getText());
                 cli.setIdade(Integer.parseInt(jtxtIdade.getText()));
                 cli.setCpf(jtxtDoc.getText());
                 cli.setEndereco(jtxtEndereco.getText());
                 cli.setNumero(Integer.parseInt(jtxtNumero.getText()));
-
+                
                 ClienteDao cl = new ClienteDao();
-                cl.inserir(cli);
+                cl.alterar(cli);
+                //observable.changeData(cli);
 
                 JOptionPane.showMessageDialog(null, "Cliente Alterado com sucesso.");
                 hide();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao inserir o Cliente." +ex);
+                JOptionPane.showMessageDialog(null, "Falha ao alterar o Cliente." +ex);
             }
 
         }else{
@@ -234,19 +248,63 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-        dispose();
+       dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
 
-    private int id;
-    public void setId(int id){
-        this.id = id;
-    }
-    public int getId(){
-        return this.id;
-    }
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            c = cd.buscarCliente(id_cliente);
+
+            jtxtNome.setText(c.getNome());
+            jtxtIdade.setText(Integer.toString(c.getIdade()));
+            jtxtDoc.setText(c.getCpf());
+            jtxtEndereco.setText(c.getEndereco());
+            jtxtNumero.setText(Integer.toString(c.getIdade()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, cd.erros());
+        }
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(jfrmAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(jfrmAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(jfrmAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(jfrmAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new jfrmAlterarCliente().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;

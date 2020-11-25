@@ -92,15 +92,15 @@
         <Menu class="javax.swing.JMenu" name="jMenuEditar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/editar.png"/>
+              <Image iconType="3" name="/imagens/listar.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Editar"/>
+            <Property name="text" type="java.lang.String" value="Altera&#xe7;&#xf5;es"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUsuarioEditar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagens/documento.png"/>
+                  <Image iconType="3" name="/imagens/listas.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
               </Properties>
@@ -111,7 +111,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPetEditar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagens/documento.png"/>
+                  <Image iconType="3" name="/imagens/listas.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pet"/>
               </Properties>
@@ -122,7 +122,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClienteEditar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagens/documento.png"/>
+                  <Image iconType="3" name="/imagens/listas.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
@@ -133,7 +133,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagens/documento.png"/>
+                  <Image iconType="3" name="/imagens/listas.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ado&#xe7;&#xe3;o"/>
               </Properties>

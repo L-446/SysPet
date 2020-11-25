@@ -17,24 +17,19 @@ import model.Adocoes;
  */
 public class jfrmAlterarAdocao extends javax.swing.JFrame {
 
+    Adocoes a = new Adocoes();
+    AdocoesDao ad = new AdocoesDao();
+    public int id_adocao1;
     /**
      * Creates new form jfrmAlterarAdocao
      */
-   final MessageObservable observable = new MessageObservable();
     
-    public jfrmAlterarAdocao(jfrmAlterarAdocao editarAdocao) {
+    public jfrmAlterarAdocao() {
         initComponents();
-        observable.addObserver(editarAdocao);
         
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);
-     
     }
-
-    jfrmAlterarAdocao(jfrmEditarAdocao aThis) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +54,11 @@ public class jfrmAlterarAdocao extends javax.swing.JFrame {
         jtxtIdPet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jbSalvar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbSalvar.setText("Salvar");
@@ -183,11 +183,12 @@ public class jfrmAlterarAdocao extends javax.swing.JFrame {
                     adocao.setPk_id_cliente(Integer.parseInt(jtxtIdCliente.getText()));
                     adocao.setRaca(jtxtRaca.getText());
                     adocao.setPk_id_pet(Integer.parseInt(jtxtIdPet.getText()));
-                    adocao.setId_adocao(this.id);
+                    adocao.setId_adocao(this.id_adocao1);
                     
                     AdocoesDao ad = new AdocoesDao();
                     ad.alterar(adocao);
-                    observable.changeData(adocao);
+                    //observable.changeData(adocao);
+                    
                     JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
                     hide();
                 } catch (Exception ex) {
@@ -195,7 +196,7 @@ public class jfrmAlterarAdocao extends javax.swing.JFrame {
                 }
             }
           }else{
-            JOptionPane.showMessageDialog(null, "Senha não atende os requisitos: \n -Ter no minimo 6 caracteres");
+            JOptionPane.showMessageDialog(null, "Dados não conferem");
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
@@ -203,14 +204,18 @@ public class jfrmAlterarAdocao extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
 
-    
-     private int id;
-    public void setId(int id){
-        this.id = id;
-    }
-    public int getId(){
-        return this.id;
-    }
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+         try {
+            a = ad.buscarAdocoes(id_adocao1);
+
+            jtxtNomeCliente.setText(a.getNome_do_cliente());
+            jtxtIdCliente.setText(Integer.toString(a.getPk_id_cliente()));
+            jtxtRaca.setText(a.getRaca());
+            jtxtIdPet.setText(Integer.toString(a.getPk_id_pet()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, ad.erros());
+        }
+    }//GEN-LAST:event_formWindowOpened
     
     /**
      * @param args the command line arguments

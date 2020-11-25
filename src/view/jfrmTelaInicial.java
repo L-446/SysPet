@@ -191,10 +191,10 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuCasdastro);
 
-        jMenuEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
-        jMenuEditar.setText("Editar");
+        jMenuEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listar.png"))); // NOI18N
+        jMenuEditar.setText("Alterações");
 
-        jMenuItemUsuarioEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/documento.png"))); // NOI18N
+        jMenuItemUsuarioEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listas.png"))); // NOI18N
         jMenuItemUsuarioEditar.setText("Usuário");
         jMenuItemUsuarioEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +203,7 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         });
         jMenuEditar.add(jMenuItemUsuarioEditar);
 
-        jMenuItemPetEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/documento.png"))); // NOI18N
+        jMenuItemPetEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listas.png"))); // NOI18N
         jMenuItemPetEditar.setText("Pet");
         jMenuItemPetEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +212,7 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         });
         jMenuEditar.add(jMenuItemPetEditar);
 
-        jMenuItemClienteEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/documento.png"))); // NOI18N
+        jMenuItemClienteEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listas.png"))); // NOI18N
         jMenuItemClienteEditar.setText("Cliente");
         jMenuItemClienteEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +221,7 @@ public class jfrmTelaInicial extends javax.swing.JFrame {
         });
         jMenuEditar.add(jMenuItemClienteEditar);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/documento.png"))); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listas.png"))); // NOI18N
         jMenuItem3.setText("Adoção");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

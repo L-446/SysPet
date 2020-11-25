@@ -5,10 +5,8 @@
  */
 package view;
 
-import controller.MessageObservable;
 import dao.PetDao;
 import java.awt.Color;
-import java.util.Observer;
 import javax.swing.JOptionPane;
 import model.Pet;
 
@@ -18,23 +16,19 @@ import model.Pet;
  */
 public class jfrmAlterarPet extends javax.swing.JFrame {
 
-     Pet p = new Pet();
+    Pet p = new Pet();
+    PetDao pd = new PetDao();
+    public int id_peta;
     /**
      * Creates new form jfrmAlterarPet
      */
-    final MessageObservable observable = new MessageObservable();
     
-    public jfrmAlterarPet(jfrmAlterarPet editarPet) {
+    public jfrmAlterarPet() {
         initComponents();
-        observable.addObserver(editarPet);
         
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);
      
-    }
-
-    jfrmAlterarPet(jfrmEditarPet aThis) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -46,7 +40,6 @@ public class jfrmAlterarPet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBSalvar2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtxtRaca = new javax.swing.JTextField();
@@ -60,14 +53,12 @@ public class jfrmAlterarPet extends javax.swing.JFrame {
         jtxtSexo = new javax.swing.JTextField();
         jBCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jBSalva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jBSalvar2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jBSalvar2.setText("Salvar");
-        jBSalvar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalvar2ActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -156,6 +147,14 @@ public class jfrmAlterarPet extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aquario.png"))); // NOI18N
         jLabel6.setText("SYSPET");
 
+        jBSalva.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBSalva.setText("Salvar");
+        jBSalva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalvaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,8 +165,8 @@ public class jfrmAlterarPet extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSalvar2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBSalva)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBCancelar)
                         .addGap(7, 7, 7))
                     .addGroup(layout.createSequentialGroup()
@@ -181,43 +180,15 @@ public class jfrmAlterarPet extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBSalvar2)
                     .addComponent(jBCancelar)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jBSalva))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBSalvar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvar2ActionPerformed
-        if(jtxtRaca.getText().length() == 0 || jtxtSexo.getText().length() == 0 || jtxtIdade.getText().length() == 0 || jtxtPeso.getText().length() == 0 || jtxtVacina.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            return;
-        }
-
-        if (jtxtRaca.getText().length() >=1 ){
-            try {
-                Pet pet = new Pet();
-                pet.setRaca(jtxtRaca.getText());
-                pet.setSexo(jtxtSexo.getText());
-                pet.setIdade(Integer.parseInt(jtxtIdade.getText()));
-                pet.setPeso(Double.parseDouble(jtxtPeso.getText()));
-                pet.setVacinas(jtxtVacina.getText());
-
-                PetDao lg = new PetDao();
-                lg.inserir(pet);
-
-                JOptionPane.showMessageDialog(null, "Pet Alterado com sucesso.");
-                hide();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Falha ao inserir o Pet." +ex);
-            }
-
-        }else{
-            JOptionPane.showMessageDialog(null, "Dados não conferem");
-        }
-    }//GEN-LAST:event_jBSalvar2ActionPerformed
 
     private void jtxtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSexoActionPerformed
         // TODO add your handling code here:
@@ -227,20 +198,59 @@ public class jfrmAlterarPet extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
 
-    private int id;
-    public void setId(int id){
-        this.id = id;
-    }
-    public int getId(){
-        return this.id;
-    }
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+         try {
+            p = pd.buscarPet(id_peta);
+
+            jtxtRaca.setText(p.getRaca());
+            jtxtSexo.setText(p.getSexo());
+            jtxtIdade.setText(Integer.toString(p.getIdade()));
+            jtxtPeso.setText(Double.toString(p.getPeso()));
+            jtxtVacina.setText(p.getVacinas());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, pd.erros());
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jBSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvaActionPerformed
+         if(jtxtRaca.getText().length() == 0 ||jtxtSexo.getText().length()== 0 || jtxtIdade.getText().length() == 0 || jtxtPeso.getText().length() == 0 ||jtxtVacina.getText().length()== 0){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
+        }
+          if (jtxtRaca.getText().length() >= 1 ){
+            try {
+                Pet pt = new Pet();
+                 
+                pt.setId(p.getId());
+                pt.setRaca(jtxtRaca.getText());
+                pt.setSexo(jtxtSexo.getText());
+                pt.setIdade(Integer.parseInt(jtxtIdade.getText()));
+                pt.setPeso(Double.parseDouble(jtxtPeso.getText()));
+                pt.setVacinas(jtxtVacina.getText());
+                
+                
+                PetDao pd = new PetDao();
+                pd.alterar(pt);
+                //observable.changeData(cli);
+
+                JOptionPane.showMessageDialog(null, "Pet Alterado com sucesso.");
+                hide();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Falha ao alterar o Pet." +ex);
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Dados não conferem");
+        }
+    }//GEN-LAST:event_jBSalvaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;
-    private javax.swing.JButton jBSalvar2;
+    private javax.swing.JButton jBSalva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

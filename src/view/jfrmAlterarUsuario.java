@@ -18,22 +18,19 @@ import model.Login;
  */
 public class jfrmAlterarUsuario extends javax.swing.JFrame {
 
+    Login l = new Login();
+    LoginDao ld = new LoginDao();
+    public int id_usuario;
     /**
      * Creates new form jfrmCadastroAluno
      */
-    final MessageObservable observable = new MessageObservable();
     
-    public jfrmAlterarUsuario(jfrmEditarUsuario editarUser) {
+    public jfrmAlterarUsuario() {
         initComponents();
-        observable.addObserver(editarUser);
-        
+
         Color minhaCor = new Color(255,228,225);
         getContentPane().setBackground(minhaCor);
      
-    }
-
-    jfrmAlterarUsuario() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -58,6 +55,11 @@ public class jfrmAlterarUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alterar dados do Usuário");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jBSalvar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBSalvar.setText("Alterar");
@@ -184,13 +186,14 @@ public class jfrmAlterarUsuario extends javax.swing.JFrame {
             if (jtxtSenha.getText().equals(jtxtconfirmacao.getText()) ){
                 try {
                     Login login = new Login();
+                    
                     login.setUsuario(jtxtNomeUsuario.getText());
                     login.setSenha(jtxtSenha.getText());
-                    login.setId(this.id);
+                    login.setId(this.id_usuario);
                     
                     LoginDao ad = new LoginDao();
                     ad.alterar(login);
-                    observable.changeData(login);
+                    //observable.changeData(login);
                     JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
                     hide();
                 } catch (Exception ex) {
@@ -220,13 +223,17 @@ public class jfrmAlterarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtconfirmacaoActionPerformed
 
-    private int id;
-    public void setId(int id){
-        this.id = id;
-    }
-    public int getId(){
-        return this.id;
-    }
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+            try {
+            l = ld.buscarUsuario(id_usuario);
+
+            jtxtNomeUsuario.setText(l.getUsuario());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, ld.erros());
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBSalvar;

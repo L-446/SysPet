@@ -26,6 +26,7 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
     /**
      * Creates new form jfrmEditarUsuario
      */
+    public int id;
     private ArrayList<Login> logins;
     // private jfrmTelaCadastro telaCadastro;
 
@@ -194,16 +195,25 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
     private void jBAlterarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarUsuarioActionPerformed
         if (jTableUsuario.getSelectedRow() > -1) {
             try {
-                Object selectedObject = (Object) jTableUsuario.getModel().getValueAt(jTableUsuario.getSelectedRow(), 1);
+                /*Object selectedObject = (Object) jTableUsuario.getModel().getValueAt(jTableUsuario.getSelectedRow(), 1);
                 LoginDao ad = new LoginDao();
                 Login l;
                 int teste = 0;
                 
                 l = ad.listar(selectedObject.toString(), teste);
                 jfrmAlterarUsuario altera = new jfrmAlterarUsuario(this);
+                
                 altera.jtxtNomeUsuario.setText(l.getUsuario());
                 altera.setId(l.getId());
-                altera.show();
+                altera.show();*/
+                
+                 id = (int) jTableUsuario.getModel().getValueAt(jTableUsuario.getSelectedRow(), 0);
+
+                jfrmAlterarUsuario alterar = new jfrmAlterarUsuario();
+                alterar.id_usuario = this.id;
+                
+                //alterar.setModal(true);
+                alterar.setVisible(true); 
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Falha ao preencher formulário!");
