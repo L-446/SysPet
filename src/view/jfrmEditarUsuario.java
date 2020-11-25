@@ -263,12 +263,11 @@ public class jfrmEditarUsuario extends javax.swing.JFrame implements Observer {
         }
     }
     private void jBExcluirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirUsuarioActionPerformed
-        if (jTableUsuario.getSelectedRow() > -1) {
+        if(JOptionPane.showConfirmDialog(rootPane, "Confirma exclusão?") == 0){
+             LoginDao lg = new LoginDao();
             try {
 
                 Object selectedObject = (Object) jTableUsuario.getModel().getValueAt(jTableUsuario.getSelectedRow(), 1);
-
-                LoginDao lg = new LoginDao();
 
                 Login l;
                 int teste = 1;

@@ -39,6 +39,7 @@ public class jfrmEditarCliente extends javax.swing.JFrame implements Observer {
                 Object linha[] = new Object[]{c.getId(), c.getNome(), c.getIdade(), c.getCpf(), c.getEndereco(), c.getNumero()};             
                 tbCliente.revalidate();
                 model.addRow(linha);
+
             }
 
         } catch (Exception ex) {
@@ -228,9 +229,7 @@ public class jfrmEditarCliente extends javax.swing.JFrame implements Observer {
                 alterar.id_cliente = this.id;
                 
                 //alterar.setModal(true);
-                alterar.setVisible(true);  
-                
-                
+                alterar.setVisible(true); 
 
             } catch (Exception e) {
                  JOptionPane.showMessageDialog(null, "Falha ao preencher formulário!" +e);
@@ -245,13 +244,11 @@ public class jfrmEditarCliente extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-       if (tbCliente.getSelectedRow() > -1) {
-           
+       if(JOptionPane.showConfirmDialog(rootPane, "Confirma exclusão?") == 0){
+            ClienteDao Cd = new ClienteDao(); 
             try {
 
                 Object selectedObject = (Object) tbCliente.getModel().getValueAt(tbCliente.getSelectedRow(), 1);
-
-                ClienteDao Cd = new ClienteDao();
 
                 Cliente l;
                 int teste = 1;

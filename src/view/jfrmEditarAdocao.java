@@ -194,12 +194,11 @@ public class jfrmEditarAdocao extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBExcluirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirUsuarioActionPerformed
-        if (tbAdocao.getSelectedRow() > -1) {
+         if(JOptionPane.showConfirmDialog(rootPane, "Confirma exclusão?") == 0){
+            AdocoesDao ad = new AdocoesDao();
             try {
 
                 Object selectedObject = (Object) tbAdocao.getModel().getValueAt(tbAdocao.getSelectedRow(), 1);
-
-                AdocoesDao ad = new AdocoesDao();
 
                 Adocoes a;
                 int teste = 1;

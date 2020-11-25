@@ -224,6 +224,7 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
           if (jtxtNome.getText().length() >= 1 ){
             try {
                 Cliente cli = new Cliente();
+                ClienteDao cl = new ClienteDao();
                  
                 cli.setId(c.getId());
                 cli.setNome(jtxtNome.getText());
@@ -231,8 +232,7 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
                 cli.setCpf(jtxtDoc.getText());
                 cli.setEndereco(jtxtEndereco.getText());
                 cli.setNumero(Integer.parseInt(jtxtNumero.getText()));
-                
-                ClienteDao cl = new ClienteDao();
+
                 cl.alterar(cli);
                 //observable.changeData(cli);
 
@@ -267,7 +267,7 @@ public class jfrmAlterarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_formWindowActivated
 
     /**

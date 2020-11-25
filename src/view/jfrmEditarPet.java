@@ -230,12 +230,11 @@ public class jfrmEditarPet extends javax.swing.JDialog {
     }//GEN-LAST:event_jbAlterarActionPerformed
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-       if (tbPet.getSelectedRow() > -1) {
+       if(JOptionPane.showConfirmDialog(rootPane, "Confirma exclusão?") == 0){
+            PetDao pd = new PetDao();
             try {
 
                 Object selectedObject = (Object) tbPet.getModel().getValueAt(tbPet.getSelectedRow(), 1);
-
-                PetDao pd = new PetDao();
 
                 Pet p;
                 int teste = 1;
